@@ -25,7 +25,7 @@ VIOLA simplifies the creation of Virtual Analog audio plug-ins, exploiting the m
 
 ## 🎸 Audio Examples
 
-Discover the power of VIOLA by listening to **audio examples** included . Navigate to the `audio_examples/` directory to hear the results of virtual analog processing.
+Discover the power of VIOLA by listening to **audio examples** on our GitHub page.
 
 ---
 
@@ -35,7 +35,7 @@ Design and simulate circuits in LTspice using the **custom component library** p
 
 - Find the library files in the `ltspice_custom_components/` directory.  
 - Explore example circuits in the `VIOLA/Data/Input/Netlist/` directory.
-- Use pre-built components of the `compiled_win/` directory in your DAWs.
+- Test the pre-built audio plug-ins of the `compiled_win/` directory in your DAWs.
 
 ---
 
