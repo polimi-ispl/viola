@@ -7,7 +7,7 @@ Welcome to the official repository for **VIOLA**, a framework designed for the *
 
 ## 📖 About VIOLA
 
-VIOLA simplifies the creation of Virtual Analog audio plug-ins, exploiting the modularity and efficiency of WDFs. Users just have to draw a circuit in LTspice and that's it: VIOLA will generate the audio plug-in making use of the MATLAB Audio Toolbox for the automatic desing of the graphic user interface and the conversion of code to C++.
+VIOLA simplifies the creation of Virtual Analog audio plug-ins, exploiting the modularity and efficiency of WDFs. Users just have to draw a circuit in LTspice and that's it: VIOLA will generate the audio plug-in making use of the MATLAB Audio Toolbox for the automatic design of the graphic user interface and the conversion of code to C++.
 
 ### Features
 
