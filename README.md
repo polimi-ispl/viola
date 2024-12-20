@@ -21,6 +21,13 @@ VIOLA simplifies the creation of Virtual Analog audio plug-ins, exploiting the m
 - **Windows OS**: The codebase is fully functional and available for use.  
 - **MacOS Support**: Coming soon.
 
+### Requirements
+
+- **Matlab R2024a or later**: the tool has been developed with version R2024a
+- **Matlab Audio Toolbox**: it enables the use of "audioPlugin" class and realted subclasses
+- **Matlab Coder**: automatic C++ code generation and plugin deployment
+- **Supported C++ Coder**: more information about can be found at [Supported compilers](https://it.mathworks.com/support/requirements/supported-compilers.html)
+
 ---
 
 ## 🎸 Audio Examples
