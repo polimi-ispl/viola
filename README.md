@@ -23,7 +23,7 @@ VIOLA simplifies the creation of Virtual Analog audio plug-ins, exploiting the m
 
 ### Requirements
 
-- **Matlab R2024a or later**: The tool has been developed with version R2024a.
+- **Matlab R2024a or Later**: The tool has been developed with version R2024a.
 - **Matlab Audio Toolbox**: Fundamental to access "audioPlugin" class and realted subclasses.
 - **Matlab Coder**: Automatic C++ code generation and plugin deployment.
 - **Supported C++ Coder**: More information about can be found at [Supported compilers](https://it.mathworks.com/support/requirements/supported-compilers.html).
@@ -50,7 +50,7 @@ Design and simulate circuits in LTspice using the **custom component library** p
 
 - **MacOS Support**: Coming soon—stay tuned!  
 - **Additional Examples**: New circuit designs will be added.
-- **Efficiency enhancements**: Codebase will be reafactored and improved.
+- **Efficiency Enhancements**: Codebase will be reafactored and improved.
 - **Additional Components**: New circuit components will be added. 
 
 ---
