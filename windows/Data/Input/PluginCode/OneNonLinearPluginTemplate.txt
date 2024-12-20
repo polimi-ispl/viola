@@ -1,0 +1,145 @@
+classdef TemplateMonoPlugin < audioPlugin
+
+    properties
+        f_s = 48000;
+        % POTENTIOMETERS PARAMETER
+        Volume = 1;
+        Enable = 'ON';
+    end
+
+    properties ( Constant )
+        PluginInterface = audioPluginInterface( ...
+            % POTENTIOMETERS GUI
+            audioPluginParameter( 'Volume' , ...
+                'DisplayName' , 'Volume' , ...
+                'DisplayNameLocation' , 'above' , ...
+                'Style' , 'rotaryknob' , ...
+                'Layout' , % VOLUME LAYOUT , ... 
+                'Mapping' , { 'lin' , 0 , 2 } ) , ...
+            audioPluginParameter( 'Enable' , ...
+                'Style' , 'vrocker' , ...
+                'DisplayNameLocation' , 'none' , ...
+                'Layout' , % BYPASS LAYOUT , ... 
+                'Mapping' , { 'enum' , 'OFF' , 'ON' } ) , ...
+            % GRID LAYOUT
+            'BackgroundImage' , 'background.png' , ...
+            'PluginName' , 'TemplateMonoPlugin' , ...
+            'VendorName' , 'ISPL' , ...
+            'VendorVersion' , '1.0.0' , ...
+            'InputChannels' , 1 , ...
+            'OutputChannels' , 1 );
+    end
+
+    properties ( Access = private )
+        n;
+        % TYPE VECTORS
+        % CIRCUIT MATRICES DECLARATION
+        P; O;
+        Z; S; 
+        a; b;
+        Ap; Up; Kp; H;
+        alpha; beta; pos; order;
+        Rp;
+        R_tol = 10 ^ ( -6 );
+    end
+
+    methods
+            
+        function p = TemplateMonoPlugin
+            s = coder.load( 'parsingResults.mat' );
+            mna = coder.load( 'mnaData.mat' );
+            p.n = length( s.typeOrder );
+            % CIRCUIT MATRICES DEFINITION
+            p.Rp = s.potRes;
+            p.P = s.params;
+            p.O = s.outPath;
+            p.Z = zeros( p.n );
+            p.S = zeros( p.n );
+            initializeWaves( p );
+            setMnaData( p , mna );
+        end
+
+        function out = process( p , in )
+            if strcmp( p.Enable , 'ON' )
+                out = processBlock( p , in );                   
+            else
+                out = in;
+            end
+        end
+
+        function reset( p )
+            p.f_s = getSampleRate( p );
+            initializeZ( p );
+            initializePots( p );
+            initializeWaves( p );
+            updateS( p );
+        end
+
+        % POTENTIOMETERS SETTER
+
+        function set.Enable( p , state )
+            p.Enable = state;
+        end
+
+        function set.Volume( p , value )
+            p.Volume = value;
+        end
+
+        function initializePots( p )
+            % POTENTIOMETERS INITIALIZATION
+        end
+
+        function initializeWaves( p )
+            p.a = zeros( p.n , 1 );
+            p.b = zeros( p.n , 1 );
+        end
+
+        function setMnaData( p , mna )
+            p.alpha = mna.alpha;
+            p.beta = mna.beta;
+            p.pos = mna.pos;
+            A = mna.A;
+            A( : , p.pos ) = [ ];
+            A( p.alpha , : ) = [ ];
+            p.Ap = A;
+            U = mna.U;
+            U( p.alpha , : ) = [ ];
+            p.Up = U;
+            K = mna.K;
+            K( : , p.alpha ) = [ ];
+            p.Kp = K;
+            p.H = mna.H;  
+            p.order = mna.order;
+        end
+
+        function initializeZ( p )
+            % LINEAR IMPEDANCES INITIALIZATION
+        end
+
+        % POTENTIOMETERS UPDATER
+
+        function updateS( p )
+            temp = diag( p.Z );
+            Zp = diag( temp( p.order , 1 ) );
+            Zp( p.pos , : ) = [ ];
+            Zp( : , p.pos ) = [ ];
+            Y_n_inv = inv( p.Ap * inv( Zp ) * p.Ap' );
+            Z_n = Y_n_inv * ( eye( size( p.Ap , 1 ) ) + p.Up * inv( p.H - p.Kp * Y_n_inv * p.Up ) * p.Kp * Y_n_inv );
+            p.Z( % NONLINEAR POSITION , % NONLINEAR POSITION ) = Z_n( p.beta , p.beta );
+            p.S = % SCATTERING MATRIX FUNCTION
+        end
+
+        function out = processBlock( p , in )
+            blockSize = size( in , 1 );
+            out = zeros( blockSize , 1 );
+            for ii = 1 : blockSize
+                % LINEAR ELEMENTS SCATTERING
+                % NONLINEAR ELEMENT SCATTERING
+                p.a = p.S * p.b;
+                out( ii ) = p.Volume * sum( ( p.a( p.O( : , 1 ) ) + p.b( p.O( : , 1 ) ) ) .* p.O( : , 2 ) ) / 2;
+            end   
+        end
+
+    end
+    
+end

@@ -1,0 +1,55 @@
+* C:\Users\Stefano\Desktop\Thesis\MATLAB_WDF\VIOLA\Data\Input\Netlist\MXR.asc
+Vin N003 0 SINE(0 0.2 250)
+V1 N001 0 9
+R3 0 N002 1Meg
+C1 N002 0 1µ
+C2 N004 N003 0.01µ
+C3 0 N003 0.001µ
+R4 N002 N005 1Meg
+R5 N005 N004 10k
+R6 N011 N012 4.7k
+XOA1 N009 N005 N006 idealopamp
+C4 N009 N012 0.047µ
+XPilog1 0 0 N011 inverselogarithmicpotentiometer params: Rp=500k x=0.5
+R8 N006 N009 1Meg
+C6 N007 N006 1µ
+R9 N008 N007 10k
+XPlog2 0 N010 N008 logarithmicpotentiometer params: Rp=50k x=0.7
+R1 N003 0 1.5Meg
+C5 N006 N009 10p
+R2 N002 N001 1Meg
+C7 N008 0 0.001µ
+XDap1 N008 0 extendedschockleydiodeantiparallel params: Is=4.352n eta=1.905 Vth=25.8563m Rs=1m Rp=1Meg n=1
+
+* block symbol definitions
+.subckt idealopamp 1 2 3
+B1 5 0 V=V(1,2)
+B2 3 0 V=V(3,5)
+.ends idealopamp
+
+.subckt inverselogarithmicpotentiometer 1 2 3
+Ra 1 2 R=Rp*(1-a*pow(b,1-x)-c)+tol
+Rb 2 3 R=Rp*(a*pow(b,1-x)+c)+tol
+.param tol=1u Rm=0.1
+.param b=pow(1/Rm-1,2)
+.param a=1/(b-1)
+.param c=-a
+.ends inverselogarithmicpotentiometer
+
+.subckt logarithmicpotentiometer 1 2 3
+Ra 1 2 R=Rp*(a*pow(b,x)+c)+tol
+Rb 2 3 R=Rp*(1-a*pow(b,x)-c)+tol
+.param tol=1u Rm=0.1
+.param b=pow(1/Rm-1,2)
+.param a=1/(b-1)
+.param c=-a
+.ends logarithmicpotentiometer
+
+.subckt extendedschockleydiodeantiparallel 1 2
+B 1 2 I=2*Is*sinh((V(1,2)-n*Rs*I(B))/(n*eta*Vth))+(V(1,2)-n*Rs*I(B))/(n*Rp)
+.ends extendedschockleydiodeantiparallel
+
+.wave "MXR_LTspice.wav" 16 48k V(n010)
+.tran 5s uic
+.backanno
+.end

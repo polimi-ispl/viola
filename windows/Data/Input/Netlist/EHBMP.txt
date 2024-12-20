@@ -1,0 +1,61 @@
+* C:\Users\Stefano\Desktop\Thesis\MATLAB_WDF\VIOLA\Data\Input\Netlist\EHBMP.asc
+R1 N007 0 1Meg
+Vin N007 0 SINE(0 0.2 250)
+C1 N007 N008 0.15µ
+R2 N009 N008 56k
+XOA1 N009 0 N003 idealopamp
+R3 N003 N009 330k
+R4 N001 N003 10k
+R5 N004 N001 47k
+C2 N004 0 0.01µ
+XOA2 N010 N004 N002 idealopamp
+C3 N002 N001 4.7n
+R6 N002 N010 560k
+R7 N010 N019 62k
+R8 N015 N019 47
+XPlin1 N015 N012 N002 linearpotentiometer params: Rp=10k x=0.5
+C4 N019 0 10µ
+C5 N012 N013 4.7µ
+R9 N014 N013 8.2k
+XOA3 N014 0 N005 idealopamp
+R10 N005 N014 470k
+C6 N005 N014 150p
+C7 N005 N017 1µ
+C8 N005 N006 0.1µ
+XPlin2 N018 N011 N006 linearpotentiometer params: Rp=10k x=0.5
+R11 N018 N017 5.6k
+C9 N018 0 0.12µ
+R12 0 N006 1.2k
+XPlog3 0 N016 N011 logarithmicpotentiometer params: Rp=50k x=0.7
+R13 N016 0 100k
+XDap1 N014 N005 extendedschockleydiodeantiparallel params: Is=4.352n eta=1.905 Vth=25.8563m Rs=1m Rp=1Meg n=3
+
+* block symbol definitions
+.subckt idealopamp 1 2 3
+B1 5 0 V=V(1,2)
+B2 3 0 V=V(3,5)
+.ends idealopamp
+
+.subckt linearpotentiometer 1 2 3
+Ra 1 2 R=Rp*x+tol
+Rb 2 3 R=Rp*(1-x)+tol
+.param tol=1u
+.ends linearpotentiometer
+
+.subckt logarithmicpotentiometer 1 2 3
+Ra 1 2 R=Rp*(a*pow(b,x)+c)+tol
+Rb 2 3 R=Rp*(1-a*pow(b,x)-c)+tol
+.param tol=1u Rm=0.1
+.param b=pow(1/Rm-1,2)
+.param a=1/(b-1)
+.param c=-a
+.ends logarithmicpotentiometer
+
+.subckt extendedschockleydiodeantiparallel 1 2
+B 1 2 I=2*Is*sinh((V(1,2)-n*Rs*I(B))/(n*eta*Vth))+(V(1,2)-n*Rs*I(B))/(n*Rp)
+.ends extendedschockleydiodeantiparallel
+
+.tran 5s
+.wave "EHBMP_LTspice.wav" 16 48k V(n016)
+.backanno
+.end
