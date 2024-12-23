@@ -27,7 +27,11 @@ VIOLA simplifies the creation of Virtual Analog audio plug-ins, exploiting the m
 - **Matlab Audio Toolbox**: Fundamental to access "audioPlugin" class and realted subclasses.
 - **Matlab Coder**: Automatic C++ code generation and plugin deployment.
 - **Supported C++ Coder**: More information about can be found at [Supported compilers](https://it.mathworks.com/support/requirements/supported-compilers.html).
-- **MacOS Users**: update and/or install Xcode v16. Then, run `sudo xcode-select -switch <path-to-xcode.app>` in your terminal. In Matlab's command window run `mex -setup C++` and `mex -setup C`.
+- **MacOS Users**: update and/or install Xcode v16. Then, run `sudo xcode-select -switch <path-to-xcode.app>` in your terminal. In Matlab's command window run:
+  ```
+  mex -setup C++
+  mex -setup C
+  ```
 
 ---
 
@@ -42,7 +46,7 @@ Discover the power of VIOLA by listening to **audio examples** on our [GitHub pa
 Design and simulate circuits in LTspice using the **custom component library** provided:
 
 - Find the library files in the `ltspice_custom_components/` directory.
-- Copy all the files inside the directory of your .asc file. The circuit symbols of custom components are in the file .
+- Copy all the files inside the directory of your .asc file. The circuit symbols of custom components are in the file `ltspice_custome_components/CustomComponents.asc`. 
 - Explore example circuits in the `windows/Data/Input/Netlist/` directory.
 - Test the pre-built audio plug-ins of the `windows/Results/` directory in your DAWs.
 
