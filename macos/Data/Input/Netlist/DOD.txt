@@ -1,0 +1,42 @@
+* 
+Vin N001 0 SINE(0 0.2 250)
+R1 N001 0 2.2Meg
+C1 N002 N001 0.01µ
+R2 N003 N002 10k
+R3 N003 0 1Meg
+XOA1 N007 N003 N004 idealopamp
+C2 N007 N008 0.047µ
+R4 N008 N010 4.7k
+XPlog1 0 0 N010 logarithmicpotentiometer params: Rp=500k x=0.5
+R5 N004 N007 1Meg
+C3 N004 N007 25p
+C4 N005 N004 4.7µ
+C5 0 N006 0.001µ
+R6 N006 N005 10k
+XD1 N006 0 extendedschockleydiode params: Is=4.352n eta=1.905 Vth=25.8563m Rs=1m Rp=1Meg
+XDser1 0 N006 extendedschockleydiode params: Is=4.352n eta=1.905 Vth=25.8563m Rs=1m Rp=1Meg n=2
+XPlog2 0 N009 N006 logarithmicpotentiometer params: Rp=100k x=0.7
+
+* block symbol definitions
+.subckt idealopamp 1 2 3
+B1 5 0 V=V(1,2)
+B2 3 0 V=V(3,5)
+.ends idealopamp
+
+.subckt logarithmicpotentiometer 1 2 3
+Ra 1 2 R=Rp*(a*pow(b,x)+c)+tol
+Rb 2 3 R=Rp*(1-a*pow(b,x)-c)+tol
+.param tol=1u Rm=0.1
+.param b=pow(1/Rm-1,2)
+.param a=1/(b-1)
+.param c=-a
+.ends logarithmicpotentiometer
+
+.subckt extendedschockleydiode 1 2
+B 1 2 I=Is*(exp((V(1,2)-Rs*I(B))/(eta*Vth))-1)+(V(1,2)-Rs*I(B))/Rp
+.ends extendedschockleydiode
+
+.wave "DOD_LTspice.wav" 16 48k V(n009)
+.tran 5s
+.backanno
+.end
