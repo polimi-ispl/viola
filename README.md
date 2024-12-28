@@ -1,4 +1,4 @@
-# VIOLA: A Framework for the Automatic Generation of Virtual Analog Audio Plug-ins based on WDFs
+# VIOLA: A Framework for the Automatic Generation of Virtual Analog Audio Plug-ins based on Wave Digital Filters
 
 Welcome to the official repository for **VIOLA**, a framework designed for the **automatic generation of virtual analog audio plug-ins** using **Wave Digital Filters (WDFs)**. This repository accompanies our paper:  
 *"VIOLA: A Framework for the Automatic Generation of Virtual Analog Audio Plug-ins based on WDFs,"* authored by R. Giampiccolo, S. Ravasi, and A. Bernardini, and submitted to the special issue "The Sound of Digital Audio Effects" of the *Journal of the Audio Engineering Society*.
