@@ -138,12 +138,12 @@ classdef DOD < audioPlugin
         end
 
         function updateP1( p )
-            p.Z( 12 , 12 ) = 0.0125 * ( 1 - 81 ^ ( p.x_1 - 1 ) ) * p.Rp( 1 ) + p.R_tol;
+            p.Z( 12 , 12 ) = 1.0125 * ( 1 - 81 ^ ( p.x_1 - 1 ) ) * p.Rp( 1 ) + p.R_tol;
         end
 
         function updateP2( p )
             p.Z( 1 , 1 ) = 0.0125 * ( 81 ^ p.x_2 - 1 ) * p.Rp( 2 ) + p.R_tol;
-            p.Z( 17 , 17 ) = 0.0125 * ( 1 - 81 ^ ( p.x_2 - 1 ) ) * p.Rp( 2 ) + p.R_tol;
+            p.Z( 17 , 17 ) = 1.0125 * ( 1 - 81 ^ ( p.x_2 - 1 ) ) * p.Rp( 2 ) + p.R_tol;
         end
 
         function out = processBlock( p , in )

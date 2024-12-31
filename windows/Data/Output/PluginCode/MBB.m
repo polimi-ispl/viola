@@ -175,7 +175,7 @@ classdef MBB < audioPlugin
 
         function updateP3( p )
             p.Z( 2 , 2 ) = 0.0125 * ( 81 ^ p.x_3 - 1 ) * p.Rp( 3 ) + p.R_tol;
-            p.Z( 23 , 23 ) = 0.0125 * ( 1 - 81 ^ ( p.x_3 - 1 ) ) * p.Rp( 3 ) + p.R_tol;
+            p.Z( 23 , 23 ) = 1.0125 * ( 1 - 81 ^ ( p.x_3 - 1 ) ) * p.Rp( 3 ) + p.R_tol;
         end
 
         function updateS( p )

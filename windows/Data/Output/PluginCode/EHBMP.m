@@ -175,7 +175,7 @@ classdef EHBMP < audioPlugin
 
         function updateP3( p )
             p.Z( 2 , 2 ) = 0.0125 * ( 81 ^ p.x_3 - 1 ) * p.Rp( 3 ) + p.R_tol;
-            p.Z( 28 , 28 ) = 0.0125 * ( 1 - 81 ^ ( p.x_3 - 1 ) ) * p.Rp( 3 ) + p.R_tol;
+            p.Z( 28 , 28 ) = 1.0125 * ( 1 - 81 ^ ( p.x_3 - 1 ) ) * p.Rp( 3 ) + p.R_tol;
         end
 
         function updateS( p )

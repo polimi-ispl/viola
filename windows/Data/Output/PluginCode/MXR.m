@@ -157,7 +157,7 @@ classdef MXR < audioPlugin
 
         function updateP2( p )
             p.Z( 1 , 1 ) = 0.0125 * ( 81 ^ p.x_2 - 1 ) * p.Rp( 2 ) + p.R_tol;
-            p.Z( 21 , 21 ) = 0.0125 * ( 1 - 81 ^ ( p.x_2 - 1 ) ) * p.Rp( 2 ) + p.R_tol;
+            p.Z( 21 , 21 ) = 1.0125 * ( 1 - 81 ^ ( p.x_2 - 1 ) ) * p.Rp( 2 ) + p.R_tol;
         end
 
         function updateS( p )
