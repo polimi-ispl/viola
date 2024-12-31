@@ -4,16 +4,19 @@ clc
 
 %% GENERAL PATH CONFIGURATION
 
+% Only for reproducibility purposes
 rng( 21 );
+
+% Paths for functions and data
 addpath( genpath( "Functions" ) , genpath( "Data" ) );
 
 %% CONFIGURATION PARAMETERS
 
 % LTspice netlist name
-netlist = 'EHBMP';
+netlist = 'MXR';
 
 % Node to measure the output voltage
-outNode = 'N016';
+outNode = 'N010';
 
 % Tolerance for SIM iterative solver
 tolSLV = 10 ^ ( -5 );
@@ -26,13 +29,13 @@ tolDSR = 1000;
 pluginType = "vst";
 
 % The code recognized by the DAW
-pluginCode = "EHBMP";
+pluginCode = "MXR";
 
 % Title displayed in the user interface
-pluginName = "ELECTRO-HARMONIX BIG MUFF PI";
+pluginName = "MXR DISTORTION PLUS";
 
 % Labels for each knob (circuit potentiometer)
-potLabels = [ "Drive" , "Tone" , "Level" ];
+potLabels = [ "Gain" , "Level" ];
 
 %% NETLIST PROCESSING
 

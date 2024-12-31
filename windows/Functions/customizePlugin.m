@@ -144,7 +144,7 @@ function [ file ] = getUpFuncs( f , potsData )
             if Y == 1
                 upFunc = "p.Z( " + m + " , " + m + " ) = ( 1 - p.x_" + N + " ) * p.Rp( " + N + " ) + p.R_tol;";
             elseif Y == 2
-                upFunc = "p.Z( " + m + " , " + m + " ) = 0.0125 * ( 1 - 81 ^ ( p.x_" + N + " - 1 ) ) * p.Rp( " + N + " ) + p.R_tol;";
+                upFunc = "p.Z( " + m + " , " + m + " ) = 1.0125 * ( 1 - 81 ^ ( p.x_" + N + " - 1 ) ) * p.Rp( " + N + " ) + p.R_tol;";
             else
                 upFunc = "p.Z( " + m + " , " + m + " ) = 0.25 * log( 1.0125 / ( p.x_" + N + " + 0.0125 ) ) * p.Rp( " + N + " ) / log( 3 ) + p.R_tol;";
             end
@@ -156,7 +156,7 @@ function [ file ] = getUpFuncs( f , potsData )
                          "p.Z( " + p + " , " + p + " ) = ( 1 - p.x_" + N + " ) * p.Rp( " + N + " ) + p.R_tol;";
             elseif Y == 2
                 upFunc = "p.Z( " + m + " , " + m + " ) = 0.0125 * ( 81 ^ p.x_" + N + " - 1 ) * p.Rp( " + N + " ) + p.R_tol;" + nl + b12 + ...
-                         "p.Z( " + p + " , " + p + " ) = 0.0125 * ( 1 - 81 ^ ( p.x_" + N + " - 1 ) ) * p.Rp( " + N + " ) + p.R_tol;";
+                         "p.Z( " + p + " , " + p + " ) = 1.0125 * ( 1 - 81 ^ ( p.x_" + N + " - 1 ) ) * p.Rp( " + N + " ) + p.R_tol;";
             else
                 upFunc = "p.Z( " + m + " , " + m + " ) = 0.25 * log( 1 + p.x_" + N + " / 0.0125 ) * p.Rp( " + N + " ) / log( 3 ) + p.R_tol;" + nl + b12 + ...
                          "p.Z( " + p + " , " + p + " ) = 0.25 * log( 1.0125 / ( p.x_" + N + " + 0.0125 ) ) * p.Rp( " + N + " ) / log( 3 ) + p.R_tol;";

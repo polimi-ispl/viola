@@ -1,4 +1,4 @@
-* C:\Users\Stefano\Desktop\Thesis\MATLAB_WDF\VIOLA\Data\Input\Netlist\DOD.asc
+* ..\VIOLA\Data\Input\Netlist\DOD.asc
 Vin N001 0 SINE(0 0.2 250)
 R1 N001 0 2.2Meg
 C1 N002 N001 0.01µ
@@ -15,7 +15,7 @@ C5 0 N006 0.001µ
 R6 N006 N005 10k
 XD1 N006 0 extendedschockleydiode params: Is=4.352n eta=1.905 Vth=25.8563m Rs=1m Rp=1Meg
 XDser1 0 N006 extendedschockleydiode params: Is=4.352n eta=1.905 Vth=25.8563m Rs=1m Rp=1Meg n=2
-XPlog2 0 N009 N006 logarithmicpotentiometer params: Rp=100k x=0.7
+XPlog2 0 N009 N006 logarithmicpotentiometer params: Rp=100k x=0.5
 
 * block symbol definitions
 .subckt idealopamp 1 2 3
@@ -37,6 +37,6 @@ B 1 2 I=Is*(exp((V(1,2)-Rs*I(B))/(eta*Vth))-1)+(V(1,2)-Rs*I(B))/Rp
 .ends extendedschockleydiode
 
 .wave "DOD_LTspice.wav" 16 48k V(n009)
-.tran 5s
+.tran 5s uic
 .backanno
 .end

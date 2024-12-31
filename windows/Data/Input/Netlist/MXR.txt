@@ -1,4 +1,4 @@
-* C:\Users\Stefano\Desktop\Thesis\MATLAB_WDF\VIOLA\Data\Input\Netlist\MXR.asc
+* ..\VIOLA\Data\Input\Netlist\MXR.asc
 Vin N003 0 SINE(0 0.2 250)
 V1 N001 0 9
 R3 0 N002 1Meg
@@ -14,7 +14,7 @@ XPilog1 0 0 N011 inverselogarithmicpotentiometer params: Rp=500k x=0.5
 R8 N006 N009 1Meg
 C6 N007 N006 1µ
 R9 N008 N007 10k
-XPlog2 0 N010 N008 logarithmicpotentiometer params: Rp=50k x=0.7
+XPlog2 0 N010 N008 logarithmicpotentiometer params: Rp=50k x=0.5
 R1 N003 0 1.5Meg
 C5 N006 N009 10p
 R2 N002 N001 1Meg

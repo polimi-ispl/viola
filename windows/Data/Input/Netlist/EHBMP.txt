@@ -1,4 +1,4 @@
-* C:\Users\Stefano\Desktop\Thesis\MATLAB_WDF\VIOLA\Data\Input\Netlist\EHBMP.asc
+* ..\VIOLA\Data\Input\Netlist\EHBMP.asc
 R1 N007 0 1Meg
 Vin N007 0 SINE(0 0.2 250)
 C1 N007 N008 0.15µ
@@ -26,7 +26,7 @@ XPlin2 N018 N011 N006 linearpotentiometer params: Rp=10k x=0.5
 R11 N018 N017 5.6k
 C9 N018 0 0.12µ
 R12 0 N006 1.2k
-XPlog3 0 N016 N011 logarithmicpotentiometer params: Rp=50k x=0.7
+XPlog3 0 N016 N011 logarithmicpotentiometer params: Rp=50k x=0.5
 R13 N016 0 100k
 XDap1 N014 N005 extendedschockleydiodeantiparallel params: Is=4.352n eta=1.905 Vth=25.8563m Rs=1m Rp=1Meg n=3
 
@@ -55,7 +55,7 @@ Rb 2 3 R=Rp*(1-a*pow(b,x)-c)+tol
 B 1 2 I=2*Is*sinh((V(1,2)-n*Rs*I(B))/(n*eta*Vth))+(V(1,2)-n*Rs*I(B))/(n*Rp)
 .ends extendedschockleydiodeantiparallel
 
-.tran 5s
+.tran 5s uic
 .wave "EHBMP_LTspice.wav" 16 48k V(n016)
 .backanno
 .end
