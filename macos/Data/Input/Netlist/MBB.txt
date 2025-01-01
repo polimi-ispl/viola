@@ -1,4 +1,4 @@
-* 
+* ..\VIOLA\Data\Input\Netlist\MBB.asc
 Vin N011 0 SINE(0 0.2 250)
 C1 N012 N011 0.01µ
 XOA1 N004 N012 N008 idealopamp
@@ -19,9 +19,9 @@ R8 N014 N013 6.8k
 C7 N014 0 0.01µ
 C8 N016 N015 0.1µ
 R9 N016 0 1.5Meg
-XPlin1 N004 N008 N005 linearpotentiometer params: Rp=100k x=0.75
+XPlin1 N004 N008 N005 linearpotentiometer params: Rp=100k x=0.5
 XPlin2 N017 N013 N010 linearpotentiometer params: Rp=25k x=0.5
-XPlog3 0 N015 N014 logarithmicpotentiometer params: Rp=100k x=0.7
+XPlog3 0 N015 N014 logarithmicpotentiometer params: Rp=100k x=0.5
 XDap1 N002 N003 extendedschockleydiodeantiparallel params: Is=4.352n eta=1.905 Vth=25.8563m Rs=1m Rp=1Meg n=2
 
 * block symbol definitions
@@ -49,7 +49,7 @@ Rb 2 3 R=Rp*(1-a*pow(b,x)-c)+tol
 B 1 2 I=2*Is*sinh((V(1,2)-n*Rs*I(B))/(n*eta*Vth))+(V(1,2)-n*Rs*I(B))/(n*Rp)
 .ends extendedschockleydiodeantiparallel
 
-.tran 5s
+.tran 5s uic
 .wave "MBB_LTspice.wav" 16 48k V(n016)
 .backanno
 .end
