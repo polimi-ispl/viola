@@ -29,7 +29,7 @@ R12 N011 N010 22k
 C13 N011 0 470p
 V1 N021 0 4.5
 XDap1 N001 0 extendedschockleydiodeantiparallel params: Is=0.622p eta=3.139 Vth=25.8563m Rs=7.9 Rp=0.8T n=1
-XPlog2 0 N023 N022 logarithmicpotentiometer params: Rp=10k x=0.5
+XPlog2 N022 N023 0 logarithmicpotentiometer params: Rp=10k x=0.5
 XPlog3 0 N015 N012 logarithmicpotentiometer params: Rp=10k x=0.5
 XPlog4 N022 N003 N002 logarithmicpotentiometer params: Rp=10k x=0.5
 XPlin5 0 N010 N003 linearpotentiometer params: Rp=100k x=0.5
@@ -63,3 +63,4 @@ Rb 2 3 R=Rp*(1-a*pow(b,x)-c)+tol
 .wave "MTG_LTspice.wav" 16 48k V(n011)
 .backanno
 .end
+

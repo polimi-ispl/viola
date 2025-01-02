@@ -69,11 +69,11 @@ classdef MTG < audioPlugin
 
     properties ( Access = private )
         n;
-        pos_Vin = [ 12 ];
-        pos_V = [ 17 ];
-        pos_R = [ 1 2 5 6 7 11 14 15 20 21 22 23 25 26 29 30 32 34 35 36 37 ];
-        pos_C = [ 3 4 8 9 10 13 16 18 19 27 28 31 33 ];
-        pos_Dap = [ 24 ];
+        pos_Vin = [ 14 ];
+        pos_V = [ 18 ];
+        pos_R = [ 1 3 5 8 10 11 13 15 16 21 22 24 25 26 27 30 32 34 35 36 37 ];
+        pos_C = [ 2 4 6 7 9 12 17 19 20 28 29 31 33 ];
+        pos_Dap = [ 23 ];
         B_V; B_I;
         P; O;
         Z; S; 
@@ -195,27 +195,27 @@ classdef MTG < audioPlugin
 
         function updateP1( p )
             p.Z( 15 , 15 ) = p.x_1 * p.Rp( 1 ) + p.R_tol;
-            p.Z( 30 , 30 ) = ( 1 - p.x_1 ) * p.Rp( 1 ) + p.R_tol;
+            p.Z( 27 , 27 ) = ( 1 - p.x_1 ) * p.Rp( 1 ) + p.R_tol;
         end
 
         function updateP2( p )
-            p.Z( 23 , 23 ) = 0.0125 * ( 81 ^ p.x_2 - 1 ) * p.Rp( 2 ) + p.R_tol;
-            p.Z( 21 , 21 ) = 1.0125 * ( 1 - 81 ^ ( p.x_2 - 1 ) ) * p.Rp( 2 ) + p.R_tol;
+            p.Z( 21 , 21 ) = 0.0125 * ( 81 ^ p.x_2 - 1 ) * p.Rp( 2 ) + p.R_tol;
+            p.Z( 37 , 37 ) = 1.0125 * ( 1 - 81 ^ ( p.x_2 - 1 ) ) * p.Rp( 2 ) + p.R_tol;
         end
 
         function updateP3( p )
             p.Z( 1 , 1 ) = 0.0125 * ( 81 ^ p.x_3 - 1 ) * p.Rp( 3 ) + p.R_tol;
-            p.Z( 34 , 34 ) = 1.0125 * ( 1 - 81 ^ ( p.x_3 - 1 ) ) * p.Rp( 3 ) + p.R_tol;
+            p.Z( 30 , 30 ) = 1.0125 * ( 1 - 81 ^ ( p.x_3 - 1 ) ) * p.Rp( 3 ) + p.R_tol;
         end
 
         function updateP4( p )
-            p.Z( 20 , 20 ) = 0.0125 * ( 81 ^ p.x_4 - 1 ) * p.Rp( 4 ) + p.R_tol;
-            p.Z( 26 , 26 ) = 1.0125 * ( 1 - 81 ^ ( p.x_4 - 1 ) ) * p.Rp( 4 ) + p.R_tol;
+            p.Z( 35 , 35 ) = 0.0125 * ( 81 ^ p.x_4 - 1 ) * p.Rp( 4 ) + p.R_tol;
+            p.Z( 3 , 3 ) = 1.0125 * ( 1 - 81 ^ ( p.x_4 - 1 ) ) * p.Rp( 4 ) + p.R_tol;
         end
 
         function updateP5( p )
             p.Z( 22 , 22 ) = p.x_5 * p.Rp( 5 ) + p.R_tol;
-            p.Z( 7 , 7 ) = ( 1 - p.x_5 ) * p.Rp( 5 ) + p.R_tol;
+            p.Z( 8 , 8 ) = ( 1 - p.x_5 ) * p.Rp( 5 ) + p.R_tol;
         end
 
         function updateS( p )
