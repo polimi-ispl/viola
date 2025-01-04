@@ -1,5 +1,5 @@
 function [ typeOrder , params , potsOrder , Q , B , outPath ] = getPluginParams( Tree , Cotree , outNode , potsData , tolSLV , tolDSR )
-disp("Generating the WDF...")
+    disp("Generating the WDF...")
 
     if isscalar( fieldnames( Tree ) )
         tree = Tree.tree;
