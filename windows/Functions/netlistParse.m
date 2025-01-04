@@ -1,5 +1,5 @@
 function [ Tree , Cotree , outNode , potsData , tempChoice ] = netlistParse( netlist , outNode )
-disp("Parsing the netlist...")
+    disp("Parsing the netlist...")
 
     if isfile( "Data\Output\NetlistParsing\mnaData.mat" )
         delete( "Data\Output\NetlistParsing\mnaData.mat" );
