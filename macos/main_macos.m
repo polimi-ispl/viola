@@ -48,4 +48,5 @@ customizePlugin( circuitClass , pluginCode , pluginName , potsOrder , typeOrder 
 
 %% PLUGIN DEPLOYMENT
 
+disp("Audio plug-in deployment...")
 eval( strcat( "generateAudioPlugin " , "-" , pluginType , " " , pluginCode ) );
