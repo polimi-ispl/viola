@@ -1,5 +1,5 @@
 function customizePlugin( circuitClass , pluginCode , pluginName , potsData , typeOrder , potLabels , Q , B )
-disp("Generating the audio plug-in...")
+    disp("Generating the audio plug-in...")
 
     [ template , class ] = chooseSourceCode( circuitClass );
     file = fread( fopen( template , "r" ) , "*char" )';
