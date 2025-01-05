@@ -1,0 +1,19 @@
+* ..\VIOLA\Data\Input\Netlist\DEMO.asc
+Vin N001 0 SINE(0 0.2 250)
+XD1 N002 N001 extendedschockleydiode params: Is=4.352n eta=1.905 Vth=25.8563m Rs=1m Rp=1Meg
+XPlin1 N002 N003 N003 linearpotentiometer params: Rp=100k x=0.5
+C1 N003 0 0.1µ
+
+* block symbol definitions
+.subckt extendedschockleydiode 1 2
+B 1 2 I=Is*(exp((V(1,2)-Rs*I(B))/(eta*Vth))-1)+(V(1,2)-Rs*I(B))/Rp
+.ends extendedschockleydiode
+
+.subckt linearpotentiometer 1 2 3
+Ra 1 2 R=Rp*x+tol
+Rb 2 3 R=Rp*(1-x)+tol
+.param tol=1u
+.ends linearpotentiometer
+
+.backanno
+.end

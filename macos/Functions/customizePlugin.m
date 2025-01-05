@@ -27,8 +27,11 @@ function [ template , class ] = chooseSourceCode( circuitClass )
     if strcmp( circuitClass , 'lin' ) |  strcmp( circuitClass , 'lin_opamp' )
         template = "LinearPluginTemplate.txt";
         class = "lin";
-    elseif strcmp( circuitClass , 'one_non_lin' ) |  strcmp( circuitClass , 'one_non_lin_opamp' )
-        template = "OneNonLinearPluginTemplate.txt";
+    elseif strcmp( circuitClass , 'one_non_lin' )
+        template = "PassiveOneNonLinearPluginTemplate.txt";
+        class = "one_non_lin";
+    elseif strcmp( circuitClass , 'one_non_lin_opamp' )
+        template = "ActiveOneNonLinearPluginTemplate.txt";
         class = "one_non_lin";
     elseif strcmp( circuitClass , 'non_lin' ) |  strcmp( circuitClass , 'non_lin_opamp' )
         template = "NonLinearPluginTemplate.txt";
