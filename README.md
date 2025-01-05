@@ -54,16 +54,17 @@ Design and simulate circuits in LTspice using the **custom component library** p
 
 ## :memo: Rules for Schematic Design
 
-To draw a compatible schematics on LTspice for VIOLA, some rules must be respected:
+To draw compatible schematics on LTspice for VIOLA, some rules must be respected:
 
 - The input signal can be specified as a voltage/current source using the name "Vin" or "Iin".
 - Only one input signal can be provided (all the generated plugins are mono).
 - Eventual DC voltage/current source name can be left unaltered (V1, V2, etc.).
 - Do not assign the same name to different components (e.g., having two resistors named "R1" will give an error).
 - Do not rename the nodes (leave the SPICE labeling: N001, N002, etc.). To specify the output node in MATLAB main write down the right node from LTspice and specify it as a string (e.g., "N005").
-- Custom element names must be declared as follows: D (diodes), Dser (diode series), Dap (antiparallel diodes), , Plin (lin potentiometers), Plog (log potentiometers), Pilog (inv-logc potentiometers), OA (ideal opamps). Then a number has to be added after each label to discriminate the different components. 
-- Specify diode parameters in the right order: Is, eta, Vth, Rs, Rp (e.g., Is=4.352n eta=1.905 Vth=25.8563m Rs=1m Rp=1Meg).
-- Series and antiparallel combination on diodes require also to add the parameter n (to account for the number of diodes in series).
+- Use only SPICE suffixes for defining the order of magnitude of parameters, e.g., mu, Meg, p, etc.
+- Custom element names must be declared as follows: D (diodes), Dser (diode series), Dap (antiparallel diodes), Plin (lin potentiometers), Plog (log potentiometers), Pilog (inv-logc potentiometers), OA (ideal opamps). Then, a number has to be added after each label to distinguish the different components. 
+- Specify diode parameters in the following order: Is, eta, Vth, Rs, Rp (e.g., Is=4.352n eta=1.905 Vth=25.8563m Rs=1m Rp=1Meg).
+- Series and antiparallel combinations on diodes also require the addition of the parameter n (to account for the number of diodes in series).
 - Assign progressive numbers to potentiometers, even though they differ in type (e.g., "Plin1", "Plog2", "Plin3", etc.).
 - Specify potentiometer parameters in the right order: Rp, x (e.g., Rp=100k x=0.75).
 
@@ -72,7 +73,7 @@ To draw a compatible schematics on LTspice for VIOLA, some rules must be respect
 ## 📅 Roadmap
 
 - **Additional Examples**: New circuit designs will be added.
-- **Efficiency Enhancements**: Codebase will be reafactored and improved.
+- **Efficiency Enhancements**: Codebase will be refactored and improved.
 - **Additional Components**: New circuit components will be added. 
 
 ---
