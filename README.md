@@ -61,7 +61,7 @@ To draw compatible schematics on LTspice for VIOLA, some rules must be respected
 - Eventual DC voltage/current source name can be left unaltered (V1, V2, etc.).
 - Do not assign the same name to different components (e.g., having two resistors named "R1" will give an error).
 - Do not rename the nodes (leave the SPICE labeling: N001, N002, etc.). To specify the output node in MATLAB main write down the right node from LTspice and specify it as a string (e.g., "N005").
-- Custom element names must be declared as follows: D (diodes), Dser (diode series), Dap (antiparallel diodes), Plin (lin potentiometers), Plog (log potentiometers), Pilog (inv-logc potentiometers), OA (ideal opamps). Then, a number has to be added after each label to distinguish the different components. 
+- Custom element names must be declared as follows: D (diodes), Dser (diode series), Dap (antiparallel diodes), Plin (lin potentiometers), Plog (log potentiometers), Pilog (inv-log potentiometers), OA (ideal opamps). Then, a number has to be added after each label to distinguish the different components. 
 - Specify diode parameters in the following order: Is, eta, Vth, Rs, Rp (e.g., Is=4.352n eta=1.905 Vth=25.8563m Rs=1m Rp=1Meg).
 - Series and antiparallel combinations on diodes also require the addition of the parameter n (to account for the number of diodes in series).
 - Assign progressive numbers to potentiometers, even though they differ in type (e.g., "Plin1", "Plog2", "Plin3", etc.).
