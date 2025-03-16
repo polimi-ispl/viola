@@ -65,6 +65,10 @@ classdef DOD250 < audioPlugin
         R_tol = 10 ^ ( -6 );
         time = 0;
         samples = 0;
+        S_cached;  % cache s-matrix
+        Z_last;  % previous z-matrix state
+        maxIter = 1000;
+        
     end
 
     methods
@@ -134,6 +138,9 @@ classdef DOD250 < audioPlugin
             p.v_old = p.v + p.tol_SLV;
             p.i = zeros( p.n , 1 );
             p.R_th = ones( p.n , 1 ) + p.tol_DSR;
+            % initial value
+            p.S_cached = eye(p.n);
+            p.Z_last = zeros(p.n);
         end
 
         function initializeZ( p )
@@ -161,17 +168,27 @@ classdef DOD250 < audioPlugin
                 p.b( p.pos_Vin ) = in( ii );
                 p.b( p.pos_R ) = 0;
                 p.b( p.pos_C ) = p.a( p.pos_C );
-                if sum( [ sum( abs( diag( p.Z( p.pos_D , p.pos_D ) ) - p.R_th( p.pos_D ) ) ) sum( abs( diag( p.Z( p.pos_Dser , p.pos_Dser ) ) - p.R_th( p.pos_Dser ) ) ) ] ) >= p.tol_DSR
+                if any(abs(diag(p.Z(p.pos_D, p.pos_D)) - p.R_th(p.pos_D)) >= p.tol_DSR) || ...
+                   any(abs(diag(p.Z(p.pos_Dser, p.pos_Dser)) - p.R_th(p.pos_Dser)) >= p.tol_DSR)
                     p.Z( p.pos_D , p.pos_D ) = diag( p.R_th( p.pos_D ) );
                     p.Z( p.pos_Dser , p.pos_Dser ) = diag( p.R_th( p.pos_Dser ) );
+                    if norm(p.Z - p.Z_last, 'fro') >= p.tol_DSR;
                     p.S = eye( p.n ) - 2 * p.Z * p.B_I' * ( ( p.B_V * p.Z * p.B_I' ) \ p.B_V );
+                    p.Z_last = p.Z;
+                    end
+                    p.S = p.S_cached;
                 end
-                while norm( p.v - p.v_old ) >= p.tol_SLV
+                iter = 0;
+                while norm( p.v - p.v_old ) >= p.tol_SLV && iter < p.maxIter
                     p.v_old = p.v;
                     p.b( p.pos_D ) = diodeScat( p.a( p.pos_D ) , p.Z( p.pos_D , p.pos_D ) , p.P( p.pos_D , : ) );
                     p.b( p.pos_Dser ) = diodeScat( p.a( p.pos_Dser ) , p.Z( p.pos_Dser , p.pos_Dser ) , p.P( p.pos_Dser , : ) );
                     p.a = p.S * p.b;
                     p.v = 0.5 * ( p.a + p.b );
+                    iter = iter + 1;
+                end
+                if iter >= p.maxIter
+                    warning('Solver did not converge at sample %d after %d iterations', ii, p.maxIter);
                 end
                 p.i = 0.5 * ( p.a - p.b ) ./ diag( p.Z );
                 p.R_th( p.pos_D ) = diodeRefPortRes( p.v( p.pos_D ) , p.i( p.pos_D ) , p.P( p.pos_D , : ) );
