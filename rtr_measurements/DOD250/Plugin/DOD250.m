@@ -87,8 +87,8 @@ classdef DOD250 < audioPlugin
         function out = process( p , in )
             if strcmp( p.Enable , 'ON' )
                 out = processBlock( p , in ); 
-                if p.samples / p.f_s >= 5
-                    out( end , 2 ) = p.time / 5;
+                if p.samples / p.f_s >= 180
+                    out( end , 2 ) = p.time / 180;
                     p.time = 0;
                     p.samples = 0;
                 end
